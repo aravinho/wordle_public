@@ -103,7 +103,7 @@ To run a pre-trained policy trained with the A2C (Advantage Actor-Critic) algori
 python test_wordle.py --policy policy_gradient --interactive --reveal_word \
 --break_between_episodes \
 --env_kwargs '{"lexicon_file": "lexicons/lexicon_100", "return_obs_as_dict": False}' \
---policy_kwargs '{"ckpt_path": "wordle/policies/policy_gradient/trained_policies/wordle_a2c_policy/checkpoints/policy_10000.pt"}'
+--policy_kwargs '{"ckpt_path": "wordle/policies/policy_gradient/trained_policies/wordle_a2c_policy/checkpoints/policy_50000.pt"}'
 ```
 Remove the `--interactive` and `--break_between_episodes` flags to run the policy on every word in the lexicon and report statistics:
 ```

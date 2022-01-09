@@ -36,7 +36,7 @@ BELLS
 CELLS
 WELLS
 ```
-To run the above interactive human play with extra debugging features, run the following.  By passing in `--magic_word <word of your choice>`, you control which magic word is used.  By passing in `--reveal_word` , every episode it will display the magic word to you.  By passing in `--break_between_episodes`, it drops into an `ipdb` debugger between episodes, which allows you to inspect the environment class member variables, etc.  Press 'c' to continue to the next episode.
+To run the above interactive human play with extra debugging features, run the following.  By passing in `--magic_word <word of your choice>`, you control which magic word is used.  By passing in `--reveal_word` , every episode it will display the magic word to you.  By passing in `--break_between_episodes`, it drops into an `ipdb` debugger between episodes, which allows you to inspect the environment class member variables, etc.  Press 'c' to continue to the next episode or Ctrl-D to quit.
 ```
 python test_wordle.py --policy human --interactive --num_episodes 100 \
 --reveal_word --magic_word apple --break_between_episodes

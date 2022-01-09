@@ -105,12 +105,29 @@ python test_wordle.py --policy policy_gradient --interactive --reveal_word \
 --env_kwargs '{"lexicon_file": "lexicons/lexicon_100", "return_obs_as_dict": False}' \
 --policy_kwargs '{"ckpt_path": "wordle/policies/policy_gradient/trained_policies/wordle_a2c_policy/checkpoints/policy_50000.pt"}'
 ```
+You might see an episode rollout like the following:
+```
+DUNKS
+WIDER
+BOXED
+_____
+_____
+_____
+```
 Remove the `--interactive` and `--break_between_episodes` flags to run the policy on every word in the lexicon and report statistics:
 ```
 python test_wordle.py --policy policy_gradient \
 --env_kwargs '{"lexicon_file": "lexicons/lexicon_100", "return_obs_as_dict": False}' \
 --policy_kwargs '{"ckpt_path": "wordle/policies/policy_gradient/trained_policies/wordle_a2c_policy/checkpoints/policy_50000.pt"}'
 ```
+You should see something like the following:
+```
+=====================================
+Number of episodes: 98
+Number of successes: 87 (88.776%)
+Average number of guesses till termination: 3.724
+```
+The policy performs decently well on a small lexicon.
 
 To train a policy with the same hyperparameters used to train the policy used above, run the following.  Note that the default training parameters use an environment with length-32 episodes, which we found useful for training.  The policy can still be tested on the standard length-6 episodes.
 ```

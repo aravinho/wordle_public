@@ -31,8 +31,8 @@ python test_wordle.py --policy human --interactive --num_episodes 100
 ```
 A game rollout may look as follows.  Yours maybe different due to randomness. The parentheses with G's, Y's and R's denote GREEN, YELLOW and RED.  This is because colors will not render properly in README, but in your terminal you should see letters marked in the appropriate colors.  
 ```
-APPLE (YRRRE)
-BEARS (RYYYS)
+APPLE (YRRRY)
+BEARS (RYYYG)
 RATES (YGRGG)
 WARES (RGGGG)
 CARES (RGGGG)

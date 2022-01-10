@@ -1,4 +1,5 @@
 
+
 # Wordle
 
 This repo is meant as a testbed for implementing policies that solve the game [Wordle](https://www.powerlanguage.co.uk/wordle/).
@@ -99,6 +100,8 @@ The `BasePolicy` interface is meant to be as lightweight as possible.  Your poli
 The `RandomPolicy`, `HumanPolicy`and `ViabilityPolicy` are useful examples to look at.
 
 ## A Reinforcement Learning Approach (Not Fully Working Yet...)
+A good Wordle policy must have some component of **exploration** in order to succeed.  It's not always the smartest thing to act greedily; sometimes it helps to try a fresh set of letters to get new information.  Therefore, training a policy with Reinforcement Learning might help.  RL algorithms have in-built exploration techniques to handle the exploration-exploitation tradeoff.
+
 The `wordle/policies/policy_gradient`directory contains a half-baked attempt at training a Wordle-playing policy using Policy Gradient algorithms (see [this blog article](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html) for a nice intro to PG methods).  The main Wordle-specific classes are in `wordle_pg.py` and the core Policy Gradients library is in `pg.py`.
 
 To run a pre-trained policy trained with the A2C (Advantage Actor-Critic) algorithm, run the following.  Note that this is only tested so far on a small-sized lexicon so far (100 words).  It still struggles on the full-sized lexicon.  The `return_obs_as_dict` argument should be False, so the environment returns observations as flat numpy arrays that can easily be passed into the policy.

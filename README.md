@@ -123,9 +123,9 @@ python test_wordle.py --policy policy_gradient \
 You should see something like the following:
 ```
 =====================================
-Number of episodes: 98
-Number of successes: 87 (88.776%)
-Average number of guesses till termination: 3.724
+Number of episodes: 100
+Number of successes: 87 (87.0%)
+Average number of guesses till termination: 4.1
 ```
 The policy performs decently well on a small lexicon.
 

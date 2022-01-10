@@ -9,8 +9,9 @@ We recommend forking the repo, so you can extend it with your powerful Wordle-pl
 ```
 conda create --name wordle_env python=3.8
 conda activate wordle_env
-pip install -e .  # installs all necessary first-party and third-party packages.
+pip install -e .
 ```
+Note that the last command has a period as the last word.
 
 ## Quick Commands to Get Started
 #### Random policy

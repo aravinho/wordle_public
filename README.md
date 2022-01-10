@@ -1,3 +1,4 @@
+
 # Wordle
 
 This repo is meant as a testbed for implementing policies that solve the game [Wordle](https://www.powerlanguage.co.uk/wordle/).
@@ -28,13 +29,14 @@ To run an interactive human-vs-CPU agent, run the following.  It will allow you 
 ```
 python test_wordle.py --policy human --interactive --num_episodes 100
 ```
-A game rollout may look as follows (the colors will not render properly in README, but in your terminal you should see letters marked in the appropriate colors (GREEN, YELLOW, and RED).  Yours maybe different due to randomness.
+A game rollout may look as follows.  Yours maybe different due to randomness. The parentheses with G's, Y's and R's denote GREEN, YELLOW and RED.  This is because colors will not render properly in README, but in your terminal you should see letters marked in the appropriate colors.  
 ```
-APPLE
-SEALS
-BELLS
-CELLS
-WELLS
+APPLE (YRRRE)
+BEARS (RYYYS)
+RATES (YGRGG)
+WARES (RGGGG)
+CARES (RGGGG)
+DARES (GGGGG)
 ```
 To run the above interactive human play with extra debugging features, run the following.  By passing in `--magic_word <word of your choice>`, you control which magic word is used.  By passing in `--reveal_word` , every episode it will display the magic word to you.  By passing in `--break_between_episodes`, it drops into an `ipdb` debugger between episodes, which allows you to inspect the environment class member variables, etc.  Press 'c' to continue to the next episode or Ctrl-D to quit.
 ```
@@ -54,13 +56,14 @@ To run a simple hand-coded policy based on a viability heuristic, run the follow
 python test_wordle.py --policy viability --interactive --reveal_word True \
 --break_between_episodes
 ```
-You might expect to see a game rollout that resembles the following (yours might be different due to randomness).
+You might expect to see a game rollout that resembles the following (yours might be different due to randomness).  Note that in this example, the policy actually failed to solve the magic word which was FAKED.
 ```
-BRACT
-TAKES
-HASTA
-SATIN
-PATSY
+YODEL (RRYGR)
+UNWED (RRRGG)
+FAMED (GGRGG)
+FACED (GGRGG)
+FATED (GGRGG)
+FARED (GGRGG)
 ```
 To test its performance on a random subset of 100 magic words and print the stats, simply run the following.  Passing in `--print_failures` will print the magic words that the policy failed on.  (You can also pass `--print_successes`).
 ```
@@ -107,12 +110,11 @@ python test_wordle.py --policy policy_gradient --interactive --reveal_word \
 ```
 You might see an episode rollout like the following:
 ```
-DUNKS
-WIDER
-BOXED
-_____
-_____
-_____
+LOWLY (RRRRR)
+GWINE (RRRRY)
+REDUX (RYYYR)
+SUEDE (RYYYR)
+UPPED (GGGGG)
 ```
 Remove the `--interactive` and `--break_between_episodes` flags to run the policy on every word in the lexicon and report statistics:
 ```
@@ -137,7 +139,7 @@ python wordle_pg.py --output_dir ./trained_policies/my_wordle_a2c_policy
 The training script will populate the `trained_policies/my_wordle_a2c_policy/checkpoints` directory with checkpoint files that can be passed into the driver script above using the `ckpt_path` parameter within `policy_kwargs`.  You can also use `tensorboard` to view the training metrics stored in `trained_policies/my_wordle_a2c_policy/logs`.
 
 ## A note on how the lexicon was prepared
-We do not know the lexicon used by the official Wordle game, so we prepared one ourselves.  The goal was to capture all "common" words without including too many "uncommon" words.  We start with three lists of 5-letter words (listed below) and include any word that  appears in two of the three files.  This gives us 4958 words.  The lexicon can be found in `wordle/lexicons/lexicon_4958`.  Smaller lexicons are found in the same directory and can be useful for debugging policies.  The `WordleEnv` uses the full 4958-word lexicon by default, but can be passed a different lexicon file at construction.  The environment samples a magic word uniformly at random each episode.
+The official Wordle game uses a large lexicon for valid guess words, but a smaller subset for valid magic words.  We wanted to have the set of possible magic words to be the same as the set of valid guess words, so we prepared a lexicon ourselves.  The goal was to capture all "common" words without including too many "uncommon" words.  We start with three lists of 5-letter words (listed below) and include any word that  appears in two of the three files.  This gives us 4958 words.  The lexicon can be found in `wordle/lexicons/lexicon_4958`.  Smaller lexicons are found in the same directory and can be useful for debugging policies.  The `WordleEnv` uses the full 4958-word lexicon by default, but can be passed a different lexicon file at construction.  The environment samples a magic word uniformly at random each episode.
 1. The list of 5-letter words from Knuth's Stanford Graph Base at [https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt](https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt)  (total: 5757 words).
 2. All five-letter words from `/usr/share/dict/words` that don't begin with an upper case letter (total: 8497 words).
 3. The top-7127 5-letter words (by frequency) from Peter Norvig's compilation of the 1/3 million most frequent English words at https://norvig.com/ngrams/count_1w.txt (7127 words, which is the average of 5757 and 8497).
